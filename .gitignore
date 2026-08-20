@@ -1,0 +1,41 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+.env
+
+# =========================
+# AI models / TensorRT
+# =========================
+models/*.pt
+models/*.onnx
+models/*.engine
+
+# Compiled DeepStream libraries
+*.so
+
+# =========================
+# Videos
+# =========================
+videos/*
+!videos/.gitkeep
+
+# =========================
+# Runtime files
+# =========================
+logs/*
+mqtt_debug/*
+
+!logs/.gitkeep
+!mqtt_debug/.gitkeep
+
+# =========================
+# IDE / OS
+# =========================
+.vscode/
+.idea/
+.DS_Store
