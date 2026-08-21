@@ -85,6 +85,26 @@ sync=0
 qos=0
 gpu-id=0
 
+[sink1]
+enable=1
+type=6
+sync=0
+
+msg-conv-payload-type=257
+msg-conv-msg2p-lib=/home/cka/Desktop/ICVision/UPWORK_PROJECTS/queue-monitoring/deepstream/msgconv/libnvds_msgconv_queue.so
+msg-conv-msg2p-new-api=1
+msg-conv-frame-interval=30
+
+msg-conv-config=/home/cka/Desktop/ICVision/UPWORK_PROJECTS/queue-monitoring/configs/msgconv_yolov12.txt
+
+msg-broker-proto-lib=/opt/nvidia/deepstream/deepstream-7.1/lib/libnvds_mqtt_proto.so
+msg-broker-conn-str=127.0.0.1;1883
+msg-broker-config=/home/cka/Desktop/ICVision/UPWORK_PROJECTS/queue-monitoring/configs/cfg_mqtt.txt
+
+topic=deepstream/queue-monitoring
+
+new-api=0
+
 
 [tests]
 file-loop=0
