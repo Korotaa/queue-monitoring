@@ -56,6 +56,12 @@ enable-past-frame=0
 display-tracking-id=1
 
 
+[nvds-analytics]
+enable=1
+
+config-file=/home/cka/Desktop/ICVision/UPWORK_PROJECTS/queue-monitoring/configs/config_nvdsanalytics.txt
+
+
 [osd]
 enable=1
 gpu-id=0
