@@ -106,5 +106,29 @@ topic=deepstream/queue-monitoring
 new-api=0
 
 
+
+[sink2]
+enable=1
+type=4
+
+source-id=0
+
+# H.264
+codec=1
+
+# Hardware encoder Jetson
+enc-type=0
+
+sync=0
+qos=0
+
+bitrate=4000000
+iframeinterval=30
+profile=0
+
+rtsp-port=8554
+udp-port=5400
+
+
 [tests]
 file-loop=0
