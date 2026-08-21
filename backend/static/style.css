@@ -1,0 +1,242 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+
+    margin: 0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #0f172a;
+
+    color: #e2e8f0;
+}
+
+
+.container {
+
+    max-width: 1400px;
+
+    margin: auto;
+
+    padding: 30px;
+}
+
+
+header {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+
+    margin-bottom: 30px;
+}
+
+
+h1 {
+
+    margin: 0;
+
+    font-size: 32px;
+}
+
+
+header p {
+
+    color: #94a3b8;
+}
+
+
+.connection {
+
+    padding:
+        10px 18px;
+
+    border-radius:
+        20px;
+
+    font-weight: bold;
+}
+
+
+.connected {
+
+    background: #14532d;
+
+    color: #86efac;
+}
+
+
+.disconnected {
+
+    background: #7f1d1d;
+
+    color: #fecaca;
+}
+
+
+.dashboard {
+
+    display: grid;
+
+    grid-template-columns:
+        2fr 1fr;
+
+    gap: 25px;
+}
+
+
+.video-panel,
+.customers-panel {
+
+    background: #1e293b;
+
+    border-radius: 12px;
+
+    padding: 20px;
+}
+
+
+.panel-title {
+
+    font-weight: bold;
+
+    margin-bottom: 15px;
+}
+
+
+.video-placeholder {
+
+    height: 480px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: #020617;
+
+    border-radius: 8px;
+
+    color: #64748b;
+
+    gap: 10px;
+}
+
+
+.video-placeholder span {
+
+    font-size: 24px;
+}
+
+
+.metrics {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 20px;
+}
+
+
+.card {
+
+    background: #1e293b;
+
+    border-radius: 12px;
+
+    padding: 25px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+
+.label {
+
+    color: #94a3b8;
+
+    margin-bottom: 15px;
+}
+
+
+.value {
+
+    font-size: 42px;
+
+    font-weight: bold;
+}
+
+
+.status {
+
+    font-size: 30px;
+
+    font-weight: bold;
+}
+
+
+.status.normal {
+
+    color: #22c55e;
+}
+
+
+.status.busy {
+
+    color: #eab308;
+}
+
+
+.status.critical {
+
+    color: #ef4444;
+}
+
+
+.customers-panel {
+
+    margin-top: 25px;
+}
+
+
+table {
+
+    width: 100%;
+
+    border-collapse:
+        collapse;
+}
+
+
+th,
+td {
+
+    padding: 14px;
+
+    text-align: left;
+
+    border-bottom:
+        1px solid #334155;
+}
+
+
+th {
+
+    color: #94a3b8;
+}

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        AI Queue Monitoring
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+
+        <div>
+            <h1>
+                AI Queue Monitoring
+            </h1>
+
+            <p>
+                Real-time Retail Queue Analytics
+            </p>
+        </div>
+
+        <div
+            id="connection"
+            class="connection disconnected"
+        >
+            OFFLINE
+        </div>
+
+    </header>
+
+
+    <section class="dashboard">
+
+        <!-- VIDEO -->
+
+        <div class="video-panel">
+
+            <div class="panel-title">
+                Camera 01
+            </div>
+
+            <div class="video-placeholder">
+
+                <span>
+                    Live Camera Feed
+                </span>
+
+                <small>
+                    DeepStream video integration next
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <!-- METRICS -->
+
+        <div class="metrics">
+
+            <div class="card">
+
+                <span class="label">
+                    Queue Length
+                </span>
+
+                <span
+                    id="queue-length"
+                    class="value"
+                >
+                    0
+                </span>
+
+            </div>
+
+
+            <div class="card">
+
+                <span class="label">
+                    Average Waiting
+                </span>
+
+                <span
+                    id="average-wait"
+                    class="value"
+                >
+                    0 s
+                </span>
+
+            </div>
+
+
+            <div class="card">
+
+                <span class="label">
+                    Longest Waiting
+                </span>
+
+                <span
+                    id="longest-wait"
+                    class="value"
+                >
+                    0 s
+                </span>
+
+            </div>
+
+
+            <div class="card">
+
+                <span class="label">
+                    Queue Status
+                </span>
+
+                <span
+                    id="queue-status"
+                    class="status normal"
+                >
+                    NORMAL
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CUSTOMERS -->
+
+    <section class="customers-panel">
+
+        <div class="panel-title">
+
+            Active Customers
+
+        </div>
+
+
+        <table>
+
+            <thead>
+
+            <tr>
+
+                <th>
+                    Track ID
+                </th>
+
+                <th>
+                    Waiting Time
+                </th>
+
+                <th>
+                    Confidence
+                </th>
+
+            </tr>
+
+            </thead>
+
+
+            <tbody id="customers">
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+</div>
+
+
+<script src="/static/app.js"></script>
+
+</body>
+
+</html>
