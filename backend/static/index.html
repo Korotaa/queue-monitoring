@@ -1,196 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>
-        AI Queue Monitoring
-    </title>
-
-    <link
-        rel="stylesheet"
-        href="/static/style.css"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QueueVision AI</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
-
 <body>
 
-<div class="container">
+<div class="app-shell">
 
-    <header>
-
-        <div>
-            <h1>
-                AI Queue Monitoring
-            </h1>
-
-            <p>
-                Real-time Retail Queue Analytics
-            </p>
+    <header class="topbar">
+        <div class="brand">
+            <div class="brand-mark"></div>
+            <div>
+                <h1>QueueVision AI</h1>
+                <p>Retail Operations Intelligence</p>
+            </div>
         </div>
 
-        <div
-            id="connection"
-            class="connection disconnected"
-        >
-            OFFLINE
-        </div>
+        <div class="header-right">
+            <div class="technology-badge">
+                Jetson • DeepStream • YOLOv12
+            </div>
 
+            <div id="connection" class="connection connecting">
+                <span class="status-dot"></span>
+                CONNECTING
+            </div>
+        </div>
     </header>
 
+    <main>
 
-    <section class="dashboard">
-
-        <!-- VIDEO -->
-
-        <div class="video-panel">
-
-            <div class="panel-title">
-                Camera 01
+        <section class="page-title">
+            <div>
+                <span class="eyebrow">CHECKOUT OPERATIONS</span>
+                <h2>Queue Monitoring</h2>
+                <p>Real-time customer flow and waiting-time analytics</p>
             </div>
 
-            <div class="video-placeholder">
+            <div class="camera-selector">
+                <span>Camera</span>
+                <strong>Checkout 01</strong>
+            </div>
+        </section>
 
-                <span>
-                    Live Camera Feed
-                </span>
+        <section class="metrics-grid">
 
-                <small>
-                    DeepStream video integration next
-                </small>
+            <article class="metric-card">
+                <div class="metric-header">
+                    <span>Queue Length</span>
+                    <div class="metric-icon green">Q</div>
+                </div>
+                <div id="queue-length" class="metric-value">0</div>
+                <div class="metric-footer">customers waiting</div>
+            </article>
 
+            <article class="metric-card">
+                <div class="metric-header">
+                    <span>Average Wait</span>
+                    <div class="metric-icon">AVG</div>
+                </div>
+                <div id="average-wait" class="metric-value">0 s</div>
+                <div class="metric-footer">current queue</div>
+            </article>
+
+            <article class="metric-card">
+                <div class="metric-header">
+                    <span>Longest Wait</span>
+                    <div class="metric-icon">MAX</div>
+                </div>
+                <div id="longest-wait" class="metric-value">0 s</div>
+                <div class="metric-footer">longest active customer</div>
+            </article>
+
+            <article class="metric-card status-card">
+                <div class="metric-header">
+                    <span>Queue Status</span>
+                    <span id="queue-status" class="queue-status normal">NORMAL</span>
+                </div>
+
+                <div class="status-description">
+                    <span id="status-indicator" class="large-status-dot normal"></span>
+                    <strong id="status-text">Operations normal</strong>
+                </div>
+
+                <div class="metric-footer">live operational status</div>
+            </article>
+
+        </section>
+
+        <section class="primary-grid">
+
+            <article class="panel video-panel">
+
+                <div class="panel-header">
+                    <div>
+                        <span class="panel-eyebrow">LIVE VIDEO</span>
+                        <h3>Checkout Camera 01</h3>
+                    </div>
+
+                    <div class="stream-badge">
+                        <span class="stream-dot"></span>
+                        WebRTC
+                    </div>
+                </div>
+
+                <div class="stream-wrapper">
+                    <!--
+                      Si le dashboard est ouvert depuis un autre PC,
+                      remplace 127.0.0.1 par l'IP de la Jetson.
+                    -->
+                    <iframe
+                        id="live-stream"
+                        src="http://127.0.0.1:8889/queue?controls=false&muted=true&autoplay=true&playsInline=true"
+                        title="DeepStream Live Feed"
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        scrolling="no"
+                        frameborder="0"
+                    ></iframe>
+
+                    <div class="stream-label">
+                        <span>AI ANALYTICS</span>
+                        YOLOv12 + NvTracker
+                    </div>
+                </div>
+
+            </article>
+
+            <article class="panel system-panel">
+
+                <div class="panel-header">
+                    <div>
+                        <span class="panel-eyebrow">PIPELINE</span>
+                        <h3>Edge AI Status</h3>
+                    </div>
+                </div>
+
+                <div class="pipeline">
+
+                    <div class="pipeline-row">
+                        <span class="pipeline-dot active"></span>
+                        <div>
+                            <strong>Video Source</strong>
+                            <small>DeepStream RTSP</small>
+                        </div>
+                        <span class="pipeline-state">ONLINE</span>
+                    </div>
+
+                    <div class="pipeline-row">
+                        <span class="pipeline-dot active"></span>
+                        <div>
+                            <strong>Detection</strong>
+                            <small>YOLOv12 TensorRT</small>
+                        </div>
+                        <span class="pipeline-state">ACTIVE</span>
+                    </div>
+
+                    <div class="pipeline-row">
+                        <span class="pipeline-dot active"></span>
+                        <div>
+                            <strong>Tracking</strong>
+                            <small>NvDCF Tracker</small>
+                        </div>
+                        <span class="pipeline-state">ACTIVE</span>
+                    </div>
+
+                    <div class="pipeline-row">
+                        <span class="pipeline-dot active"></span>
+                        <div>
+                            <strong>Queue Analytics</strong>
+                            <small>NvDsAnalytics</small>
+                        </div>
+                        <span class="pipeline-state">ACTIVE</span>
+                    </div>
+
+                    <div class="pipeline-row">
+                        <span class="pipeline-dot active"></span>
+                        <div>
+                            <strong>Messaging</strong>
+                            <small>MQTT / Mosquitto</small>
+                        </div>
+                        <span class="pipeline-state">ONLINE</span>
+                    </div>
+
+                </div>
+
+                <div class="last-update">
+                    Last analytics update
+                    <strong id="last-update">--</strong>
+                </div>
+
+            </article>
+
+        </section>
+
+        <section class="panel customers-panel">
+
+            <div class="panel-header">
+                <div>
+                    <span class="panel-eyebrow">QUEUE DETAILS</span>
+                    <h3>Active Customers</h3>
+                </div>
+
+                <span id="customer-count" class="customer-count">0 active</span>
             </div>
 
-        </div>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>TRACK ID</th>
+                        <th>STATUS</th>
+                        <th>WAITING TIME</th>
+                        <th>DETECTION CONFIDENCE</th>
+                    </tr>
+                    </thead>
 
-
-        <!-- METRICS -->
-
-        <div class="metrics">
-
-            <div class="card">
-
-                <span class="label">
-                    Queue Length
-                </span>
-
-                <span
-                    id="queue-length"
-                    class="value"
-                >
-                    0
-                </span>
-
+                    <tbody id="customers"></tbody>
+                </table>
             </div>
 
+        </section>
 
-            <div class="card">
-
-                <span class="label">
-                    Average Waiting
-                </span>
-
-                <span
-                    id="average-wait"
-                    class="value"
-                >
-                    0 s
-                </span>
-
-            </div>
-
-
-            <div class="card">
-
-                <span class="label">
-                    Longest Waiting
-                </span>
-
-                <span
-                    id="longest-wait"
-                    class="value"
-                >
-                    0 s
-                </span>
-
-            </div>
-
-
-            <div class="card">
-
-                <span class="label">
-                    Queue Status
-                </span>
-
-                <span
-                    id="queue-status"
-                    class="status normal"
-                >
-                    NORMAL
-                </span>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- CUSTOMERS -->
-
-    <section class="customers-panel">
-
-        <div class="panel-title">
-
-            Active Customers
-
-        </div>
-
-
-        <table>
-
-            <thead>
-
-            <tr>
-
-                <th>
-                    Track ID
-                </th>
-
-                <th>
-                    Waiting Time
-                </th>
-
-                <th>
-                    Confidence
-                </th>
-
-            </tr>
-
-            </thead>
-
-
-            <tbody id="customers">
-
-            </tbody>
-
-        </table>
-
-    </section>
+    </main>
 
 </div>
 
-
 <script src="/static/app.js"></script>
-
 </body>
-
 </html>

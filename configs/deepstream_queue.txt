@@ -93,7 +93,7 @@ sync=0
 msg-conv-payload-type=257
 msg-conv-msg2p-lib=/home/cka/Desktop/ICVision/UPWORK_PROJECTS/queue-monitoring/deepstream/msgconv/libnvds_msgconv_queue.so
 msg-conv-msg2p-new-api=1
-msg-conv-frame-interval=30
+msg-conv-frame-interval=5
 
 msg-conv-config=/home/cka/Desktop/ICVision/UPWORK_PROJECTS/queue-monitoring/configs/msgconv_yolov12.txt
 
@@ -110,20 +110,23 @@ new-api=0
 [sink2]
 enable=1
 type=4
-
 source-id=0
 
-# H.264
+# H.264 hardware
 codec=1
-
-# Hardware encoder Jetson
 enc-type=0
 
 sync=0
 qos=0
 
+# 4 Mbps
 bitrate=4000000
-iframeinterval=30
+
+# image clé fréquente, utile pour faible latence
+iframeinterval=15
+
+# IMPORTANT :
+# 0 = H.264 Baseline
 profile=0
 
 rtsp-port=8554

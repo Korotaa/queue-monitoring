@@ -39,3 +39,7 @@ mqtt_debug/*
 .vscode/
 .idea/
 .DS_Store
+
+# HLS runtime stream
+backend/static/hls/*
+!backend/static/hls/.gitkeep

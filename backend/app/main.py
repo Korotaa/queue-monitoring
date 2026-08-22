@@ -37,7 +37,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="AI Queue Monitoring API",
-    version="0.2.0",
+    version="0.3.0",
     lifespan=lifespan,
 )
 
@@ -51,7 +51,6 @@ app.mount(
 
 @app.get("/")
 def dashboard():
-
     return FileResponse(
         STATIC_DIR / "index.html"
     )
@@ -59,7 +58,6 @@ def dashboard():
 
 @app.get("/api/queue/status")
 def queue_status():
-
     return queue_manager.get_stats()
 
 
@@ -71,7 +69,6 @@ async def queue_websocket(
     await websocket.accept()
 
     try:
-
         while True:
 
             stats = queue_manager.get_stats()
@@ -80,8 +77,7 @@ async def queue_websocket(
                 stats
             )
 
-            await asyncio.sleep(1)
+            await asyncio.sleep(0.25)
 
     except WebSocketDisconnect:
-
         print("Dashboard disconnected")
