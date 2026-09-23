@@ -21,7 +21,6 @@ The same architecture can be adapted to checkout queues, waiting areas, people f
 ---
 
 
-
 ## 🎥 End-to-End Demo
 
 The following technical demonstration shows the complete **QueueVision AI** pipeline running on an NVIDIA Jetson Orin Nano.
@@ -29,7 +28,7 @@ The following technical demonstration shows the complete **QueueVision AI** pipe
 > **Note:** the current recording uses construction-site footage to validate the end-to-end technical pipeline: detection, tracking, analytics, messaging, API and browser streaming. A retail checkout scene is recommended for final business-level validation of the `QUEUE → SERVICE → EXIT` workflow.
 
 <p align="center">
-  <a href="https://youtu.be/xmGMBkxRDmM?si=J35orEgudlqYvwoR">
+  <a href="https://youtu.be/xmGMBkxRDmM?si=FojFUAoJ-PcyHge8">
     <img
       src="docs/screenshots/01-dashboard-overview.png"
       alt="QueueVision AI End-to-End Demo"
@@ -38,9 +37,15 @@ The following technical demonstration shows the complete **QueueVision AI** pipe
 </p>
 
 <p align="center">
-  <a href="https://youtu.be/xmGMBkxRDmM?si=J35orEgudlqYvwoR">
-    <strong>▶ Watch the End-to-End Demo on YouTube</strong>
+  <a href="https://youtu.be/xmGMBkxRDmM?si=FojFUAoJ-PcyHge8">
+    <img
+      src="https://img.shields.io/badge/▶%20WATCH%20THE%20DEMO-YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white&labelColor=0D1117"
+      alt="Watch QueueVision AI Demo on YouTube">
   </a>
+</p>
+
+<p align="center">
+  <strong>NVIDIA Jetson Orin Nano · DeepStream 7.1 · YOLOv12 · TensorRT · MQTT · FastAPI · WebRTC</strong>
 </p>
 
 **Demonstrated pipeline:**
