@@ -11,8 +11,10 @@
 <div class="app-shell">
 
     <header class="topbar">
+
         <div class="brand">
             <div class="brand-mark"></div>
+
             <div>
                 <h1>QueueVision AI</h1>
                 <p>Retail Operations Intelligence</p>
@@ -20,6 +22,7 @@
         </div>
 
         <div class="header-right">
+
             <div class="technology-badge">
                 Jetson • DeepStream • YOLOv12
             </div>
@@ -28,23 +31,29 @@
                 <span class="status-dot"></span>
                 CONNECTING
             </div>
+
         </div>
+
     </header>
+
 
     <main>
 
         <section class="page-title">
+
             <div>
                 <span class="eyebrow">CHECKOUT OPERATIONS</span>
-                <h2>Queue Monitoring</h2>
-                <p>Real-time customer flow and waiting-time analytics</p>
+                <h2>Queue & Service Monitoring</h2>
+                <p>Real-time queue, waiting-time and checkout service analytics</p>
             </div>
 
             <div class="camera-selector">
                 <span>Camera</span>
                 <strong>Checkout 01</strong>
             </div>
+
         </section>
+
 
         <section class="metrics-grid">
 
@@ -57,6 +66,17 @@
                 <div class="metric-footer">customers waiting</div>
             </article>
 
+
+            <article class="metric-card">
+                <div class="metric-header">
+                    <span>In Service</span>
+                    <div class="metric-icon green">S</div>
+                </div>
+                <div id="in-service" class="metric-value">0</div>
+                <div class="metric-footer">customers at checkout</div>
+            </article>
+
+
             <article class="metric-card">
                 <div class="metric-header">
                     <span>Average Wait</span>
@@ -66,19 +86,55 @@
                 <div class="metric-footer">current queue</div>
             </article>
 
+
             <article class="metric-card">
                 <div class="metric-header">
                     <span>Longest Wait</span>
                     <div class="metric-icon">MAX</div>
                 </div>
                 <div id="longest-wait" class="metric-value">0 s</div>
-                <div class="metric-footer">longest active customer</div>
+                <div class="metric-footer">longest active wait</div>
             </article>
 
+
+            <article class="metric-card">
+                <div class="metric-header">
+                    <span>Average Service</span>
+                    <div class="metric-icon">AVG</div>
+                </div>
+                <div id="average-service" class="metric-value">0 s</div>
+                <div class="metric-footer">completed services</div>
+            </article>
+
+
+            <article class="metric-card">
+                <div class="metric-header">
+                    <span>Served / Hour</span>
+                    <div class="metric-icon green">1H</div>
+                </div>
+                <div id="served-hour" class="metric-value">0</div>
+                <div class="metric-footer">last rolling hour</div>
+            </article>
+
+
+            <article class="metric-card">
+                <div class="metric-header">
+                    <span>Service Efficiency</span>
+                    <div class="metric-icon green">%</div>
+                </div>
+                <div id="service-efficiency" class="metric-value">100%</div>
+                <div class="metric-footer">served vs abandoned, last hour</div>
+            </article>
+
+
             <article class="metric-card status-card">
+
                 <div class="metric-header">
                     <span>Queue Status</span>
-                    <span id="queue-status" class="queue-status normal">NORMAL</span>
+
+                    <span id="queue-status" class="queue-status normal">
+                        NORMAL
+                    </span>
                 </div>
 
                 <div class="status-description">
@@ -86,16 +142,21 @@
                     <strong id="status-text">Operations normal</strong>
                 </div>
 
-                <div class="metric-footer">live operational status</div>
+                <div class="metric-footer">
+                    live operational status
+                </div>
+
             </article>
 
         </section>
+
 
         <section class="primary-grid">
 
             <article class="panel video-panel">
 
                 <div class="panel-header">
+
                     <div>
                         <span class="panel-eyebrow">LIVE VIDEO</span>
                         <h3>Checkout Camera 01</h3>
@@ -105,13 +166,12 @@
                         <span class="stream-dot"></span>
                         WebRTC
                     </div>
+
                 </div>
 
+
                 <div class="stream-wrapper">
-                    <!--
-                      Si le dashboard est ouvert depuis un autre PC,
-                      remplace 127.0.0.1 par l'IP de la Jetson.
-                    -->
+
                     <iframe
                         id="live-stream"
                         src="http://127.0.0.1:8889/queue?controls=false&muted=true&autoplay=true&playsInline=true"
@@ -123,69 +183,71 @@
 
                     <div class="stream-label">
                         <span>AI ANALYTICS</span>
-                        YOLOv12 + NvTracker
+                        QUEUE → SERVICE → EXIT
                     </div>
+
                 </div>
 
             </article>
+
 
             <article class="panel system-panel">
 
                 <div class="panel-header">
                     <div>
-                        <span class="panel-eyebrow">PIPELINE</span>
-                        <h3>Edge AI Status</h3>
+                        <span class="panel-eyebrow">SERVICE FLOW</span>
+                        <h3>Customer Lifecycle</h3>
                     </div>
                 </div>
 
-                <div class="pipeline">
 
-                    <div class="pipeline-row">
-                        <span class="pipeline-dot active"></span>
+                <div class="flow">
+
+                    <div class="flow-step">
+                        <span class="flow-number">1</span>
                         <div>
-                            <strong>Video Source</strong>
-                            <small>DeepStream RTSP</small>
+                            <strong>QUEUE</strong>
+                            <small>Waiting timer starts</small>
                         </div>
-                        <span class="pipeline-state">ONLINE</span>
                     </div>
 
-                    <div class="pipeline-row">
-                        <span class="pipeline-dot active"></span>
+                    <div class="flow-arrow">↓</div>
+
+                    <div class="flow-step">
+                        <span class="flow-number">2</span>
                         <div>
-                            <strong>Detection</strong>
-                            <small>YOLOv12 TensorRT</small>
+                            <strong>SERVICE</strong>
+                            <small>Service timer starts</small>
                         </div>
-                        <span class="pipeline-state">ACTIVE</span>
                     </div>
 
-                    <div class="pipeline-row">
-                        <span class="pipeline-dot active"></span>
-                        <div>
-                            <strong>Tracking</strong>
-                            <small>NvDCF Tracker</small>
-                        </div>
-                        <span class="pipeline-state">ACTIVE</span>
-                    </div>
+                    <div class="flow-arrow">↓</div>
 
-                    <div class="pipeline-row">
-                        <span class="pipeline-dot active"></span>
+                    <div class="flow-step">
+                        <span class="flow-number">3</span>
                         <div>
-                            <strong>Queue Analytics</strong>
-                            <small>NvDsAnalytics</small>
+                            <strong>EXIT</strong>
+                            <small>Customer counted as served</small>
                         </div>
-                        <span class="pipeline-state">ACTIVE</span>
-                    </div>
-
-                    <div class="pipeline-row">
-                        <span class="pipeline-dot active"></span>
-                        <div>
-                            <strong>Messaging</strong>
-                            <small>MQTT / Mosquitto</small>
-                        </div>
-                        <span class="pipeline-state">ONLINE</span>
                     </div>
 
                 </div>
+
+
+                <div class="service-summary">
+
+                    <div>
+                        <span>Service level</span>
+                        <strong id="service-level">100%</strong>
+                    </div>
+
+                    <div>
+                        <span>Abandoned</span>
+                        <strong id="abandoned">0</strong>
+                    </div>
+
+                </div>
+
 
                 <div class="last-update">
                     Last analytics update
@@ -196,30 +258,41 @@
 
         </section>
 
+
         <section class="panel customers-panel">
 
             <div class="panel-header">
+
                 <div>
-                    <span class="panel-eyebrow">QUEUE DETAILS</span>
-                    <h3>Active Customers</h3>
+                    <span class="panel-eyebrow">ACTIVE CUSTOMERS</span>
+                    <h3>Queue & Checkout Details</h3>
                 </div>
 
-                <span id="customer-count" class="customer-count">0 active</span>
+                <span id="customer-count" class="customer-count">
+                    0 active
+                </span>
+
             </div>
 
+
             <div class="table-wrapper">
+
                 <table>
+
                     <thead>
                     <tr>
                         <th>TRACK ID</th>
                         <th>STATUS</th>
                         <th>WAITING TIME</th>
-                        <th>DETECTION CONFIDENCE</th>
+                        <th>SERVICE TIME</th>
+                        <th>CONFIDENCE</th>
                     </tr>
                     </thead>
 
                     <tbody id="customers"></tbody>
+
                 </table>
+
             </div>
 
         </section>
@@ -229,5 +302,6 @@
 </div>
 
 <script src="/static/app.js"></script>
+
 </body>
 </html>

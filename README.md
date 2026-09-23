@@ -20,7 +20,51 @@ The same architecture can be adapted to checkout queues, waiting areas, people f
 
 ---
 
+
+
+## 🎥 End-to-End Demo
+
+The following technical demonstration shows the complete **QueueVision AI** pipeline running on an NVIDIA Jetson Orin Nano.
+
+> **Note:** the current recording uses construction-site footage to validate the end-to-end technical pipeline (detection, tracking, analytics, messaging, API and browser streaming). A retail checkout scene is recommended for final business-level validation of the `QUEUE → SERVICE → EXIT` workflow.
+
+<p align="center">
+  <img src="docs/screenshots/01-dashboard-overview.png" alt="QueueVision AI dashboard" width="950">
+</p>
+
+<p align="center">
+  <a href="demo/queuevision-demo-en.mp4"><strong>▶ Watch the English demo</strong></a>
+  &nbsp;•&nbsp;
+  <a href="demo/queuevision-demo-fr.mp4"><strong>▶ Voir la démo française</strong></a>
+</p>
+
+**Demonstrated pipeline:**
+
+```text
+Video / CCTV
+    ↓
+YOLOv12 + TensorRT
+    ↓
+NVIDIA DeepStream 7.1
+    ↓
+NvDCF Tracking
+    ↓
+NvDsAnalytics (QUEUE / SERVICE)
+    ├──────────────► MQTT ─► FastAPI ─► WebSocket
+    │
+    └──────────────► RTSP ─► GStreamer ─► MediaMTX ─► WebRTC
+                                      ↓
+                                  Dashboard
+```
+
+---
+
 ## Architecture
+
+
+<p align="center">
+  <img src="docs/screenshots/architecture.png" alt="QueueVision AI dashboard" width="950">
+</p>
 
 ```text
                          NVIDIA Jetson Orin Nano
@@ -57,6 +101,60 @@ The same architecture can be adapted to checkout queues, waiting areas, people f
 ```
 
 ---
+
+
+
+## 📸 Screenshots
+
+### Real-Time Monitoring Dashboard
+
+<p align="center">
+  <img src="docs/screenshots/01-dashboard-overview.png" alt="QueueVision AI dashboard" width="950">
+</p>
+
+The dashboard combines the annotated live stream with queue length, waiting-time metrics, service state and customer lifecycle information.
+
+### Browser WebRTC Stream
+
+<p align="center">
+  <img src="docs/screenshots/02-webrtc-live-stream.png" alt="WebRTC browser stream" width="950">
+</p>
+
+The DeepStream RTSP output is converted to a browser-compatible H.264 stream and delivered through **MediaMTX / WebRTC**.
+
+### FastAPI Real-Time Metrics
+
+<p align="center">
+  <img src="docs/screenshots/03-rest-api-status.png" alt="FastAPI REST API response" width="700">
+</p>
+
+The backend exposes the current analytics state as structured JSON: queue length, active track IDs, waiting times, service metrics and operational status.
+
+### Automated System Startup
+
+<p align="center">
+  <img src="docs/screenshots/04-system-start.png" alt="QueueVision AI system startup" width="760">
+</p>
+
+A single runtime script starts the complete stack in the required order: **Mosquitto → MediaMTX → DeepStream → GStreamer → FastAPI**.
+
+### Runtime Health Check
+
+<p align="center">
+  <img src="docs/screenshots/05-system-status.png" alt="QueueVision AI runtime status" width="950">
+</p>
+
+The status command verifies the main services, process IDs, ports and application endpoints.
+
+### Controlled Shutdown
+
+<p align="center">
+  <img src="docs/screenshots/06-system-stop.png" alt="QueueVision AI shutdown" width="700">
+</p>
+
+The complete application can be stopped cleanly while leaving Mosquitto available as a system service.
+
+
 
 ## Features
 
@@ -753,92 +851,6 @@ Embedded Systems · Edge AI · Computer Vision · NVIDIA Jetson · DeepStream
 
 ---
 
-## 🎥 End-to-End Demo
-
-The following technical demonstration shows the complete **QueueVision AI** pipeline running on an NVIDIA Jetson Orin Nano.
-
-> **Note:** the current recording uses construction-site footage to validate the end-to-end technical pipeline (detection, tracking, analytics, messaging, API and browser streaming). A retail checkout scene is recommended for final business-level validation of the `QUEUE → SERVICE → EXIT` workflow.
-
-<p align="center">
-  <img src="docs/screenshots/01-dashboard-overview.png" alt="QueueVision AI dashboard" width="950">
-</p>
-
-<p align="center">
-  <a href="demo/queuevision-demo-en.mp4"><strong>▶ Watch the English demo</strong></a>
-  &nbsp;•&nbsp;
-  <a href="demo/queuevision-demo-fr.mp4"><strong>▶ Voir la démo française</strong></a>
-</p>
-
-**Demonstrated pipeline:**
-
-```text
-Video / CCTV
-    ↓
-YOLOv12 + TensorRT
-    ↓
-NVIDIA DeepStream 7.1
-    ↓
-NvDCF Tracking
-    ↓
-NvDsAnalytics (QUEUE / SERVICE)
-    ├──────────────► MQTT ─► FastAPI ─► WebSocket
-    │
-    └──────────────► RTSP ─► GStreamer ─► MediaMTX ─► WebRTC
-                                      ↓
-                                  Dashboard
-```
-
----
-
-## 📸 Screenshots
-
-### Real-Time Monitoring Dashboard
-
-<p align="center">
-  <img src="docs/screenshots/01-dashboard-overview.png" alt="QueueVision AI dashboard" width="950">
-</p>
-
-The dashboard combines the annotated live stream with queue length, waiting-time metrics, service state and customer lifecycle information.
-
-### Browser WebRTC Stream
-
-<p align="center">
-  <img src="docs/screenshots/02-webrtc-live-stream.png" alt="WebRTC browser stream" width="950">
-</p>
-
-The DeepStream RTSP output is converted to a browser-compatible H.264 stream and delivered through **MediaMTX / WebRTC**.
-
-### FastAPI Real-Time Metrics
-
-<p align="center">
-  <img src="docs/screenshots/03-rest-api-status.png" alt="FastAPI REST API response" width="700">
-</p>
-
-The backend exposes the current analytics state as structured JSON: queue length, active track IDs, waiting times, service metrics and operational status.
-
-### Automated System Startup
-
-<p align="center">
-  <img src="docs/screenshots/04-system-start.png" alt="QueueVision AI system startup" width="760">
-</p>
-
-A single runtime script starts the complete stack in the required order: **Mosquitto → MediaMTX → DeepStream → GStreamer → FastAPI**.
-
-### Runtime Health Check
-
-<p align="center">
-  <img src="docs/screenshots/05-system-status.png" alt="QueueVision AI runtime status" width="950">
-</p>
-
-The status command verifies the main services, process IDs, ports and application endpoints.
-
-### Controlled Shutdown
-
-<p align="center">
-  <img src="docs/screenshots/06-system-stop.png" alt="QueueVision AI shutdown" width="700">
-</p>
-
-The complete application can be stopped cleanly while leaving Mosquitto available as a system service.
 
 ## License
 

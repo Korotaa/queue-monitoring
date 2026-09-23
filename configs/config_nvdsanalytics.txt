@@ -5,19 +5,32 @@ config-height=640
 osd-mode=2
 display-font-size=16
 
+# ------------------------------------------------------------------
+# ROIs - stream 0
+# IMPORTANT:
+# QUEUE is your existing queue zone.
+# SERVICE is an example zone and MUST be adjusted to your real checkout.
+# Coordinates are expressed in the 640x640 analytics reference frame.
+# ------------------------------------------------------------------
 
 [roi-filtering-stream-0]
 enable=1
 class-id=0
 inverse-roi=0
 
+# Existing queue polygon
 roi-QUEUE=80;220;560;220;620;620;20;620
 
+# Example service / checkout polygon (adjust to your camera)
+roi-SERVICE=430;60;630;60;630;220;430;220
+
+
+# ------------------------------------------------------------------
+# Queue overcrowding
+# ------------------------------------------------------------------
 
 [overcrowding-stream-0]
 enable=1
 class-id=0
-
 roi-QUEUE=80;220;560;220;620;620;20;620
-
 object-threshold=5
