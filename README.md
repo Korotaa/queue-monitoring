@@ -26,38 +26,29 @@ The same architecture can be adapted to checkout queues, waiting areas, people f
 
 The following technical demonstration shows the complete **QueueVision AI** pipeline running on an NVIDIA Jetson Orin Nano.
 
-> **Note:** the current recording uses construction-site footage to validate the end-to-end technical pipeline (detection, tracking, analytics, messaging, API and browser streaming). A retail checkout scene is recommended for final business-level validation of the `QUEUE → SERVICE → EXIT` workflow.
+> **Note:** the current recording uses construction-site footage to validate the end-to-end technical pipeline: detection, tracking, analytics, messaging, API and browser streaming. A retail checkout scene is recommended for final business-level validation of the `QUEUE → SERVICE → EXIT` workflow.
 
 <p align="center">
-  <img src="docs/screenshots/01-dashboard-overview.png" alt="QueueVision AI dashboard" width="950">
+  <a href="https://youtu.be/xmGMBkxRDmM?si=J35orEgudlqYvwoR">
+    <img
+      src="docs/screenshots/01-dashboard-overview.png"
+      alt="QueueVision AI End-to-End Demo"
+      width="900">
+  </a>
 </p>
 
 <p align="center">
-  <a href="demo/queuevision-demo-en.mp4"><strong>▶ Watch the English demo</strong></a>
-  &nbsp;•&nbsp;
-  <a href="demo/queuevision-demo-fr.mp4"><strong>▶ Voir la démo française</strong></a>
+  <a href="https://youtu.be/xmGMBkxRDmM?si=J35orEgudlqYvwoR">
+    <strong>▶ Watch the End-to-End Demo on YouTube</strong>
+  </a>
 </p>
 
 **Demonstrated pipeline:**
 
-```text
-Video / CCTV
-    ↓
-YOLOv12 + TensorRT
-    ↓
-NVIDIA DeepStream 7.1
-    ↓
-NvDCF Tracking
-    ↓
-NvDsAnalytics (QUEUE / SERVICE)
-    ├──────────────► MQTT ─► FastAPI ─► WebSocket
-    │
-    └──────────────► RTSP ─► GStreamer ─► MediaMTX ─► WebRTC
-                                      ↓
-                                  Dashboard
-```
+`Video → YOLOv12 → TensorRT → DeepStream → NvDCF → NvDsAnalytics → MQTT / RTSP → FastAPI / MediaMTX → WebSocket / WebRTC → Dashboard`
 
 ---
+
 
 ## Architecture
 
@@ -65,40 +56,6 @@ NvDsAnalytics (QUEUE / SERVICE)
 <p align="center">
   <img src="docs/screenshots/architecture.png" alt="QueueVision AI dashboard" width="950">
 </p>
-
-```text
-                         NVIDIA Jetson Orin Nano
-┌────────────────────────────────────────────────────────────────────┐
-│                                                                    │
-│   Video / CCTV / RTSP                                              │
-│          │                                                         │
-│          ▼                                                         │
-│   NVIDIA DeepStream 7.1                                            │
-│          │                                                         │
-│      nvstreammux                                                   │
-│          │                                                         │
-│      nvinfer ── YOLOv12 / TensorRT                                 │
-│          │                                                         │
-│      NvDCF Tracker                                                 │
-│          │                                                         │
-│      NvDsAnalytics ── QUEUE / SERVICE                              │
-│          │                                                         │
-│     ┌────┴───────────────┐                                         │
-│     │                    │                                         │
-│     ▼                    ▼                                         │
-│   MQTT                  RTSP                                       │
-│     │                    │                                         │
-│ Mosquitto      GStreamer low-latency transcode                     │
-│     │                    │                                         │
-│ FastAPI              MediaMTX                                      │
-│     │                    │                                         │
-│ WebSocket             WebRTC                                       │
-│     └──────────┬─────────┘                                         │
-│                ▼                                                   │
-│           Web Dashboard                                            │
-│                                                                    │
-└────────────────────────────────────────────────────────────────────┘
-```
 
 ---
 
